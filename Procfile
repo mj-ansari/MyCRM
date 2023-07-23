@@ -1,0 +1,1 @@
+web : gunicorn MyCRM.wsgi --log-file -

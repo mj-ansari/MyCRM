@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<br>
+{% if user.is_authenticated %}
+<h1>Customers</h1>
+<br>
+{% if customers %}
+<table class="table table-hover table-bordered table-responsive">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+            <th scope="col">Pincode</th>
+            <th scope="col">Created At</th>
+            <th scope="col">ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for customer in customers %}
+        <tr>
+            <td>{{customer.first_name}} {{customer.last_name}}</td>
+            <td>{{customer.email}}</td>
+            <td>{{customer.phone}}</td>
+            <td>{{customer.address}}</td>
+            <td>{{customer.city}}</td>
+            <td>{{customer.state}}</td>
+            <td>{{customer.pincode}}</td>
+            <td>{{customer.created_at}}</td>
+            <td><a href="{% url 'customer' customer.id %}">{{customer.id}}</a></td>
+        </tr>
+        {% endfor %}
+        
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-warning" role="alert">
+Sorry No Records Found !!
+</div>
+{% endif %}
+<a class="btn btn-outline-primary" aria-current="page" href="{% url 'add_customer' %}">Add Customer</a>
+
+
+{% else %}
+<div class="col-md-6 offset-md-3">
+    <h1>Login Form</h1>
+    <br>
+    <form action="{% url 'home' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="InputUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="InputUser1" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label for="InputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="InputPassword1" name="password" required>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-outline-dark">Login</button>
+    </form>
+</div>
+{% endif %}
+<br>
+
+{% endblock %}

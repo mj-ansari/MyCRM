@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<br>
+<div class="col-md-6 offset-md-3">
+    <h1>Register Form</h1>
+    <br>
+    <form action="" method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Forms Has Error !!
+            {% for field in form %}
+            {% if field.errors %}
+            {{field.errors}}
+            {% endif %}
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-outline-dark">Register</button>
+    </form>
+    <br>
+    <div class="alert alert-danger text-center" role="alert">
+        Dont Use Personal Information In This Website !! <br>
+        This Website Is Just Created For Testing Purpose !! <br>
+        I'm Not Responsible For Your lose !!
+    </div>
+</div>
+
+{% endblock %}
